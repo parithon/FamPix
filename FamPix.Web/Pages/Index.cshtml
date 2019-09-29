@@ -1,0 +1,48 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-9">
+        <form id="imgUploader" class="dropzone" asp-page="./Index" method="post" enctype="multipart/form-data">
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        @foreach (var photo in Model.Photos)
+        {
+            <img src="@photo.Thumbnail" alt="@photo.Name" />
+        }
+    </div>
+</div>
+
+@section head {
+    <link rel="stylesheet" href="~/lib/dropzone/min/dropzone.min.css" />
+}
+
+@section scripts {
+    <script src="~/lib/dropzone/min/dropzone.min.js"></script>
+    <script type="text/javascript">
+        Dropzone.options.imgUploader = {
+            maxFileSize: 2, // MB
+            acceptedFiles: 'image/*',
+            accept: function (file, done) {
+                if (file.name == 'test.png') {
+                    done('Sorry, that file is not supported.');
+                }
+                else {
+                    done();
+                }
+            }
+        };
+    </script>
+}
