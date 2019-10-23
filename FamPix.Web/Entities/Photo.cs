@@ -11,6 +11,10 @@ namespace FamPix.Web.Entities
 
         public string Thumbnail { get; set; }
 
+        public string Cover { get; set; }
+
+        public string Full { get; set; }
+
         internal ICollection<PhotoAlbum> PhotoAlbums { get; set; } = new List<PhotoAlbum>();
 
         internal ICollection<PhotoTag> PhotoTags { get; set; } = new List<PhotoTag>();

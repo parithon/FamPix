@@ -1,0 +1,1 @@
+﻿# Directory used for uploaded content from the end-user.

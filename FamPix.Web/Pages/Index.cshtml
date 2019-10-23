@@ -21,6 +21,8 @@
         @foreach (var photo in Model.Photos)
         {
             <img src="@photo.Thumbnail" alt="@photo.Name" />
+            <img src="@photo.Cover" alt="@photo.Name" />
+            <img src="@photo.Full" alt="@photo.Name" />
         }
     </div>
 </div>
@@ -34,7 +36,7 @@
     <script type="text/javascript">
         Dropzone.options.imgUploader = {
             maxFileSize: 2, // MB
-            acceptedFiles: 'image/*',
+            acceptedFiles: 'image/*,.heic',
             accept: function (file, done) {
                 if (file.name == 'test.png') {
                     done('Sorry, that file is not supported.');
