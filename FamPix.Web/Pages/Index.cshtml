@@ -8,3 +8,31 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<div>
+
+    <div class="card-columns">
+        @foreach (var photo in Model.Photos)
+        {
+            <div class="card">
+                <img src="@photo.Url" alt="@photo.Name" class="card-img" />
+                <div class="card-img-overlay text-sm-right">
+                    <form asp-area="" asp-page="Index" class="d-inline">
+                        <input type="hidden" id="id" name="id" value="@photo.Id" />
+                        <input type="submit" class="btn btn-success" asp-page-handler="Update" value="✔" />
+                    </form>
+                    <form asp-area="" asp-page="Index" class="d-inline">
+                        <input type="hidden" id="id" name="id" value="@photo.Id" />
+                        <input type="submit" class="btn btn-danger" asp-page-handler="Delete" value="❌" />
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+
+    <form asp-area="" asp-page="Index">
+        <div class="form-group">
+            <input type="submit" value="Add" />
+        </div>
+    </form>
+</div>
