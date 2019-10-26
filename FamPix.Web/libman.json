@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "library": "yall-js@3.1.6",
+      "destination": "wwwroot/lib/yall-js/",
+      "files": [
+        "dist/yall.min.js"
+      ]
+    }
+  ]
+}
