@@ -24,6 +24,7 @@ namespace FamPix.Data
         {
             modelBuilder.ApplyConfiguration(new PhotoConfiguration());
             modelBuilder.ApplyConfiguration(new AlbumConfiguration());
+            modelBuilder.ApplyConfiguration(new PhotosAlbumsConfiguration());
             base.OnModelCreating(modelBuilder);
         }
 

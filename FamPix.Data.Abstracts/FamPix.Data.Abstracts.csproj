@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FamPix.Core\FamPix.Core.csproj" />
     <ProjectReference Include="..\FamPix.Data.Entities\FamPix.Data.Entities.csproj" />
   </ItemGroup>
 

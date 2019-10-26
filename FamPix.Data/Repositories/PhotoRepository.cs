@@ -2,23 +2,12 @@
 using FamPix.Data.Entities;
 using FamPix.Core;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace FamPix.Data.Repositories
 {
-    public static class PhotoRepositoryExtensions
-    {
-        public static Task<List<T>> ToListAsync<T>(this IQueryable<T> query)
-        {
-            return EntityFrameworkQueryableExtensions.ToListAsync(query);
-        }
-    }
-
-    public class PhotoRepository
+    public class PhotoRepository : IRepository<Photo>
     {
         private readonly IFamPixDbContext _context;
 
@@ -36,7 +25,7 @@ namespace FamPix.Data.Repositories
 
         public async Task<Photo> GetAsync(int id)
         {
-            var result = await GetAll().ToListAsync();                
+            var result = await GetAll().ToListAsync();
             return result.SingleOrDefault(p => p.Id == id);
         }
 
