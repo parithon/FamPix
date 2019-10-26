@@ -1,4 +1,5 @@
-﻿using FamPix.Data;
+﻿using FamPix.Core;
+using FamPix.Data;
 using FamPix.Data.Abstracts;
 using FamPix.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,8 @@ namespace FamPix
                 options.UseSqlServer(connectionString));
 
             services.AddScoped<IFamPixDbContext, FamPixDbContext>();
-            services.AddScoped<PhotoRepository>();
+            services.AddScoped<IRepository<Photo>, PhotoRepository>();
+            services.AddScoped<IRepository<Album>, AlbumRepository>();
 
             return services;
         }

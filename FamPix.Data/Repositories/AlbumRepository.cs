@@ -2,6 +2,7 @@
 using FamPix.Data.Abstracts;
 using FamPix.Data.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -29,17 +30,24 @@ namespace FamPix.Data.Repositories
             return result.SingleOrDefault(a => a.Id == id);
         }
 
-        public async Task<Album> AddAsync(Album Album)
+        public async Task<Album> AddAsync(Album album)
         {
-            var AlbumDAO = Album.ToDAO<AlbumDAO>();
+            var AlbumDAO = album.ToDAO<AlbumDAO>();
             _context.Albums.Add(AlbumDAO);
             await _context.SaveChangesAsync();
             return AlbumDAO.ToDTO<Album>();
         }
 
-        public async Task<bool> UpdateAsync(Album Album)
+        public async Task<bool> AddRangeAsync(IEnumerable<Album> albums)
         {
-            var AlbumDAO = Album.ToDAO<AlbumDAO>();
+            var albumDAOcol = albums.Select(album => album.ToDAO<AlbumDAO>());
+            await _context.Albums.AddRangeAsync(albumDAOcol);
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> UpdateAsync(Album album)
+        {
+            var AlbumDAO = album.ToDAO<AlbumDAO>();
             _context.Albums.Update(AlbumDAO);
             return await _context.SaveChangesAsync() > 0;
         }

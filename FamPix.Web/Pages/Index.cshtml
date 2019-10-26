@@ -11,20 +11,25 @@
 
 <div>
 
-    <div class="card-columns">
+    <div class="row">
         @foreach (var photo in Model.Photos)
         {
-            <div class="card">
-                <img src="@photo.Url" alt="@photo.Name" class="card-img" />
-                <div class="card-img-overlay text-sm-right">
-                    <form asp-area="" asp-page="Index" class="d-inline">
-                        <input type="hidden" id="id" name="id" value="@photo.Id" />
-                        <input type="submit" class="btn btn-success" asp-page-handler="Update" value="✔" />
-                    </form>
-                    <form asp-area="" asp-page="Index" class="d-inline">
-                        <input type="hidden" id="id" name="id" value="@photo.Id" />
-                        <input type="submit" class="btn btn-danger" asp-page-handler="Delete" value="❌" />
-                    </form>
+            <div class="col-md-5">
+                <div class="card">
+                    <img data-src="@photo.Url" alt="@photo.Name" class="card-img thumbnail" />
+                    <div class="card-img-overlay">
+                        <h1 class="text-white-50 float-left">@photo.Id</h1>
+                        <div class="text-sm-right">
+                            <form asp-area="" asp-page="Index" class="d-inline">
+                                <input type="hidden" id="id" name="id" value="@photo.Id" />
+                                <input type="submit" class="btn btn-success" asp-page-handler="Update" value="✔" />
+                            </form>
+                            <form asp-area="" asp-page="Index" class="d-inline">
+                                <input type="hidden" id="id" name="id" value="@photo.Id" />
+                                <input type="submit" class="btn btn-danger" asp-page-handler="Delete" value="❌" />
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         }

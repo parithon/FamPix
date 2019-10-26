@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FamPix.Data.Repositories
+namespace FamPix.Core
 {
     public static class IQueryableExtensions
     {

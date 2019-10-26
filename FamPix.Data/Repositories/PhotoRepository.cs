@@ -4,6 +4,7 @@ using FamPix.Core;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace FamPix.Data.Repositories
 {
@@ -35,6 +36,13 @@ namespace FamPix.Data.Repositories
             _context.Photos.Add(photoDAO);
             await _context.SaveChangesAsync();
             return photoDAO.ToDTO<Photo>();
+        }
+
+        public async Task<bool> AddRangeAsync(IEnumerable<Photo> photos)
+        {
+            var photoDAOcol = photos.Select(photo => photo.ToDAO<PhotoDAO>());
+            await _context.Photos.AddRangeAsync(photoDAOcol);
+            return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<bool> UpdateAsync(Photo photo)
