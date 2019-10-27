@@ -10,6 +10,7 @@ namespace FamPix.Data.Abstracts
         DbSet<AlbumDAO> Albums { get; set; }
         DbSet<PhotoDAO> Photos { get; set; }
 
+        Task ResetDb();
         int SaveChanges();
         int SaveChanges(bool acceptAllChangesOnSuccess);
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);

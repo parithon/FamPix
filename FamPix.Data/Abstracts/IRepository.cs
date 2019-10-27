@@ -13,5 +13,9 @@ namespace FamPix.Data.Abstracts
         Task<T> GetAsync(int id);
         Task<bool> RemoveAsync(int id);
         Task<bool> UpdateAsync(T entity);
+#if DEBUG
+        // TODO: REMOVE BEFORE RELEASE
+        Task<bool> RemoveRangeAsync(IEnumerable<T> photos);
+#endif
     }
 }

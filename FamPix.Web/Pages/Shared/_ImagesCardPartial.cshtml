@@ -1,0 +1,25 @@
+﻿@model IEnumerable<FamPix.Core.Photo>
+@{
+}
+
+@foreach (var photo in Model)
+{
+    <div class="col-md-4">
+        <div class="card">
+            <img src="//placehold.it/400x300" data-src="@photo.Url" alt="@photo.Name" class="card-img lazy" />
+            <div class="card-img-overlay">
+                <h1 class="text-white-50 float-left">@photo.Id</h1>
+                <div class="text-sm-right">
+                    <form asp-area="" asp-page="Index" class="d-inline">
+                        <input type="hidden" id="id" name="id" value="@photo.Id" />
+                        <input type="submit" class="btn btn-success" asp-page-handler="Update" value="✔" />
+                    </form>
+                    <form asp-area="" asp-page="Index" class="d-inline">
+                        <input type="hidden" id="id" name="id" value="@photo.Id" />
+                        <input type="submit" class="btn btn-danger" asp-page-handler="Delete" value="❌" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}

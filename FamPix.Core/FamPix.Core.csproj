@@ -8,8 +8,4 @@
     <PackageReference Include="NodaTime" Version="2.4.7" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\FamPix.Data.Entities\FamPix.Data.Entities.csproj" />
-  </ItemGroup>
-
 </Project>

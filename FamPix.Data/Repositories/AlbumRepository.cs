@@ -58,5 +58,12 @@ namespace FamPix.Data.Repositories
             _context.Albums.Remove(AlbumDAO);
             return await _context.SaveChangesAsync() > 0;
         }
+
+        public async Task<bool> RemoveRangeAsync(IEnumerable<Album> albums)
+        {
+            var albumDAOcol = albums.Select(album => album.ToDAO<AlbumDAO>());
+            _context.Albums.RemoveRange(albumDAOcol);
+            return await _context.SaveChangesAsync() > 0;
+        }
     }
 }

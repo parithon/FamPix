@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UserSecretsId>27bd9901-662a-4700-9220-7ab62efb0bbc</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,7 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FamPix.Core\FamPix.Core.csproj" />
-    <ProjectReference Include="..\FamPix.Data.Abstracts\FamPix.Data.Abstracts.csproj" />
     <ProjectReference Include="..\FamPix.Data\FamPix.Data.csproj" />
   </ItemGroup>
 

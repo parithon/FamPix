@@ -10,34 +10,24 @@
 </div>
 
 <div>
-
     <div class="row">
-        @foreach (var photo in Model.Photos)
-        {
-            <div class="col-md-5">
-                <div class="card">
-                    <img src="//placehold.it/400x300" data-src="@photo.Url" alt="@photo.Name" class="card-img lazy" />
-                    <div class="card-img-overlay">
-                        <h1 class="text-white-50 float-left">@photo.Id</h1>
-                        <div class="text-sm-right">
-                            <form asp-area="" asp-page="Index" class="d-inline">
-                                <input type="hidden" id="id" name="id" value="@photo.Id" />
-                                <input type="submit" class="btn btn-success" asp-page-handler="Update" value="✔" />
-                            </form>
-                            <form asp-area="" asp-page="Index" class="d-inline">
-                                <input type="hidden" id="id" name="id" value="@photo.Id" />
-                                <input type="submit" class="btn btn-danger" asp-page-handler="Delete" value="❌" />
-                            </form>
-                        </div>
-                    </div>
+        <div class="col-3">
+            <form asp-area="" asp-page="Index">
+                <div class="form-group">                    
+                    <p><input type="submit" value="Add" /> <span>Adds 1000 photos</span></p>
                 </div>
-            </div>
-        }
+            </form>
+        </div>
+        <div class="col-3">
+            <form asp-area="" asp-page="Index">
+                <div class="form-group">
+                    <p><input type="submit" asp-page-handler="Reset" value="Reset" /> <span>Removes all photos</span></p>                    
+                </div>
+            </form>
+        </div>
     </div>
 
-    <form asp-area="" asp-page="Index">
-        <div class="form-group">
-            <input type="submit" value="Add" />
-        </div>
-    </form>
+    <div id="photos" class="row">
+        <partial name="_ImagesCardPartial" for="Photos" />
+    </div>
 </div>

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using FamPix.Data.Abstracts;
+using System.Linq;
 
 namespace FamPix.Web.Pages
 {
@@ -14,13 +15,15 @@ namespace FamPix.Web.Pages
     {
         private readonly IRepository<Photo> _photos;
         private readonly IRepository<Album> _albums;
+        private readonly IFamPixDbContext _context;
 
         private readonly ILogger<IndexModel> _logger;
 
-        public IndexModel(IRepository<Photo> photos, IRepository<Album> albums, ILogger<IndexModel> logger)
+        public IndexModel(IRepository<Photo> photos, IRepository<Album> albums, IFamPixDbContext context, ILogger<IndexModel> logger)
         {
             _photos = photos;
             _albums = albums;
+            _context = context;
             _logger = logger;
         }
 
@@ -29,10 +32,16 @@ namespace FamPix.Web.Pages
 
         public async Task<IActionResult> OnGetAsync()
         {
-            Photos = await _photos.GetAll().ToListAsync();
+            Photos = await _photos.GetAll().Take(21).ToListAsync();
             Albums = await _albums.GetAll().ToListAsync();
 
             return Page();
+        }
+
+        public async Task<IActionResult> OnGetLoadImagesAsync(int skip)
+        {
+            var photos = await _photos.GetAll().Skip(skip).Take(21).ToListAsync();
+            return Partial("_ImagesCardPartial", photos);
         }
 
         public async Task<IActionResult> OnPostUpdateAsync(int id)
@@ -70,6 +79,12 @@ namespace FamPix.Web.Pages
 
             await _photos.AddRangeAsync(photos);
 
+            return RedirectToPage(nameof(Index));
+        }
+
+        public async Task<IActionResult> OnPostResetAsync()
+        {
+            await _context.ResetDb();
             return RedirectToPage(nameof(Index));
         }
     }

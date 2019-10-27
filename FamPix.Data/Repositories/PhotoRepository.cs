@@ -58,5 +58,12 @@ namespace FamPix.Data.Repositories
             _context.Photos.Remove(photoDAO);
             return await _context.SaveChangesAsync() > 0;
         }
+
+        public async Task<bool> RemoveRangeAsync(IEnumerable<Photo> photos)
+        {
+            var photoDAOcol = photos.Select(photo => photo.ToDAO<PhotoDAO>());
+            _context.Photos.RemoveRange(photoDAOcol);
+            return await _context.SaveChangesAsync() > 0;
+        }
     }
 }

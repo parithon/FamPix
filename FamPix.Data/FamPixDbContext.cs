@@ -16,6 +16,15 @@ namespace FamPix.Data
         {
         }
 
+#if DEBUG
+        // TODO: REMOVE BEFORE RELEASE
+        public async Task ResetDb()
+        {
+            await this.Database.EnsureDeletedAsync();
+            await this.Database.MigrateAsync();
+        }
+#endif
+
         public DbSet<PhotoDAO> Photos { get; set; }
 
         public DbSet<AlbumDAO> Albums { get; set; }
