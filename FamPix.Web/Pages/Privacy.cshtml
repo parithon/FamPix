@@ -3,6 +3,15 @@
 @{
     ViewData["Title"] = "Privacy Policy";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<iframe class="w-100 border-0" scrolling="yes" src="https://app.termly.io/document/privacy-policy/627fb16f-a27c-41ee-a6c4-827949b413ab"></iframe>
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(() => {
+            var elem = $("iframe");
+            var height = $(document).innerHeight() - $("header").outerHeight() - $("footer").outerHeight() - 50;
+            elem.css("height", `${height}px`);
+        });
+    </script>
+}
