@@ -32,6 +32,10 @@
     </div>
 </div>
 
+<div class="fixed-bottom bg-info">
+    Retrieved <span id="takenPhotos" class="font-weight-bold">@Model.Photos.Count()</span> of <span class="font-weight-bold">@Model.TotalPhotos</span> images from the database. Loaded <span id="loadedPhotos" class="font-weight-bold">0</span>
+</div> 
+
 @section scripts {
     <partial name="_ImageLazyLoadingScriptsPartial" />
 }

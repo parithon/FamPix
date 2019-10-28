@@ -1,4 +1,5 @@
 ﻿using FamPix.Data;
+using FamPix.Data.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
@@ -13,11 +14,15 @@ namespace Microsoft.Extensions.Hosting
             var services = scope.ServiceProvider;
             try
             {
-                var context = services.GetRequiredService<FamPixDbContext>();
+                var dbContext = services.GetRequiredService<FamPixDbContext>();
+                var idContext = services.GetRequiredService<IdentityContext>();
 
-                if (context.Database.GetPendingMigrations().Any())
+                dbContext.Database.EnsureCreated();
+                idContext.Database.EnsureCreated();                
+
+                if (dbContext.Database.GetPendingMigrations().Any())
                 {
-                    context.Database.Migrate();
+                    dbContext.Database.Migrate();
                 }
             }
             finally

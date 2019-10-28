@@ -5,7 +5,7 @@
 @foreach (var photo in Model)
 {
     <div class="col-md-4">
-        <div class="card">
+        <div class="card card-lazy-img">
             <img src="//placehold.it/400x300" data-src="@photo.Url" alt="@photo.Name" class="card-img lazy" />
             <div class="card-img-overlay">
                 <h1 class="text-white-50 float-left">@photo.Id</h1>

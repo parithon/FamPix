@@ -28,11 +28,14 @@ namespace FamPix.Web.Pages
         }
 
         public ICollection<Photo> Photos { get; set; }
+        public int TotalPhotos { get; set; }
+
         public ICollection<Album> Albums { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
         {
             Photos = await _photos.GetAll().Take(21).ToListAsync();
+            TotalPhotos = await Task.Run(() => _photos.GetAll().Count());
             Albums = await _albums.GetAll().ToListAsync();
 
             return Page();

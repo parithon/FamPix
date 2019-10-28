@@ -1,8 +1,10 @@
+using FamPix.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Net.Http.Headers;
 
 namespace FamPix.Web
 {
@@ -18,8 +20,8 @@ namespace FamPix.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();            
-            services.AddDatabase(Configuration.GetConnectionString("FamPixDbContext"));            
+            services.AddRazorPages();
+            services.AddDatabase(Configuration.GetConnectionString(nameof(FamPixDbContext)));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,7 +39,14 @@ namespace FamPix.Web
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                OnPrepareResponse = ctx =>
+                {
+                    const int durationInSeconds = 60 * 60 * 24;
+                    ctx.Context.Response.Headers[HeaderNames.CacheControl] = $"public,max-age={durationInSeconds}";
+                }
+            });
 
             app.UseRouting();
 
@@ -46,6 +55,7 @@ namespace FamPix.Web
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers();
                 endpoints.MapRazorPages();
             });
         }
